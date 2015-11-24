@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    /*padding: 1.5rem 1.2rem;*/
+    overflow: hidden;
+    font-size: 24px;
+    line-height: 36px;
+    font-family: monospace;
+}
+#editor-wrapper {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #F45C1A;
+}
+#editor {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-size: 24px;
+    line-height: 36px;
+    background: #D0EACC;
+    color: #444;
+    -webkit-transition: bottom .4s ease-in;
+}
+.ace_gutter {
+    display: none
+}
+.ace_disallowed,
+.ace_disallowed + .ace_suffix {
+    color: #F45C1A
+}
+h1 {
+    visibility: hidden
+}
+#erroneous {
+    position: absolute;
+    bottom: 0;
+}
+#erroneous a {
+    color: #D0EACC;
+    display: inline-block;
+    padding: .2em .4em;
+    border: 2px solid #D0EACC;
+    border-left-width: 0;
+    cursor: pointer;
+}

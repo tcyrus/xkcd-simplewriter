@@ -1,0 +1,31 @@
+{
+  "name": "xkcd-simplewriter",
+  "version": "1.0.0",
+  "description": "An Electron App of the XKCD Simple Writer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "updateWords": "wget -qN http://xkcd.com/simplewriter/words.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcyrus/xkcd-simplewriter.git"
+  },
+  "keywords": [
+    "electron",
+    "xkcd",
+    "thing",
+    "explainer",
+    "simple",
+    "writer"
+  ],
+  "author": "GitHub",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcyrus/xkcd-simplewriter/issues"
+  },
+  "homepage": "https://github.com/tcyrus/xkcd-simplewriter#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.34.0"
+  }
+}

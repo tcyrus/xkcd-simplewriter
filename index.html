@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <h1>upwriter</h1>
+    <div id="editor-wrapper">
+      <div id="erroneous"></div>
+      <div id="editor"></div>
+    </div>
+    <script src="words.js"></script>
+    <script src="ace.min.js"></script>
+    <script>
+      'use strict';
+      const electron = require('electron');
+      const ipcRenderer = electron.ipcRenderer;
+
+      const editor = ace.edit("editor");
+      const session = editor.getSession();
+      session.setMode("ace/mode/upwriter");
+      session.setUseWrapMode(true);
+      session.setTabSize(0);
+      editor.focus();
+
+      const editorElement = document.getElementById('editor');
+      const wrap = document.getElementById('editor-wrapper');
+      const erroneous = document.getElementById('erroneous');
+
+      function loadString(val) {
+        editor.setValue(val);
+      }
+
+      erroneous.addEventListener('click', e => {
+        if (e.target.tagName.toLowerCase() === "a") {
+          editor.find(e.target.innerText);
+          editor.findAll(e.target.innerText);
+          editor.focus();
+        }
+      });
+
+      session.on('changeMode', () => {
+        session.getMode().onRecalculateAllowed(editor, d => {
+          erroneous.innerHTML = d.map(w => `<a>${w}</a>`).join('');
+          wrap.classList[d.length > 0 ? 'add' : 'remove']('invalid');
+          editorElement.style.bottom = `${erroneous.clientHeight}px`;
+        });
+      });
+
+      document.ondragover = document.ondrop = e => {
+        e.preventDefault();
+        return false;
+      };
+
+
+      wrap.ondragover = () => false;
+
+      wrap.ondragleave = wrap.ondragend = () => false;
+
+      wrap.ondrop = e => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.dataTransfer.files[0];
+        reader.onload = e => loadString(e.target.result);
+        reader.readAsText(file);
+        return false;
+      };
+
+      ipcRenderer.on('loadString', (e, val) => {
+        loadString(val);
+      });
+
+      ipcRenderer.on('getString', (e, val) => {
+        e.returnValue = editor.getValue();
+      });
+    </script>
+  </body>
+</html>
