@@ -6,6 +6,7 @@ body {
     line-height: 36px;
     font-family: monospace;
 }
+
 #editor-wrapper {
     margin: 0;
     position: absolute;
@@ -15,6 +16,7 @@ body {
     right: 0;
     background: #F45C1A;
 }
+
 #editor {
     margin: 0;
     position: absolute;
@@ -28,20 +30,25 @@ body {
     color: #444;
     -webkit-transition: bottom .4s ease-in;
 }
+
 .ace_gutter {
     display: none
 }
+
 .ace_disallowed,
 .ace_disallowed + .ace_suffix {
     color: #F45C1A
 }
+
 h1 {
     visibility: hidden
 }
+
 #erroneous {
     position: absolute;
     bottom: 0;
 }
+
 #erroneous a {
     color: #D0EACC;
     display: inline-block;
