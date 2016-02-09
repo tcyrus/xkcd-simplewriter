@@ -27,7 +27,6 @@ define("ace/mode/upwriter_highlight_rules",["require","exports","module","ace/li
   };
 
   oop.inherits(UpwriterHighlightRules, TextHighlightRules);
-
   exports.UpwriterHighlightRules = UpwriterHighlightRules;
 });
 
@@ -42,26 +41,27 @@ define("ace/mode/upwriter",["require","exports","module","ace/lib/oop","ace/mode
   let Mode = function() {
     this.HighlightRules = UpwriterHighlightRules;
   };
-
   oop.inherits(Mode, TextMode);
 
   Mode.prototype.$id = "ace/mode/upwriter";
 
-  // // optimized, hence ugly for loops
-  // Mode.prototype.getFirstDisallowed = function(editor) {
-  //   var session = editor.getSession();
-  //   var i, j, line, first, lines = session.doc.getAllLines();
-  //   outer: for (i = 0; i < lines.length; i++) {
-  //     line = session.getTokens(i);
-  //     for (j = 0; j < line.length; j++) {
-  //       if (line[j].type === "disallowed") {
-  //         first = line[j].value;
-  //         break outer;
-  //       }
-  //     }
-  //   }
-  //   return first;
-  // };
+  /*
+  // optimized, hence ugly for loops
+  Mode.prototype.getFirstDisallowed = function(editor) {
+    var session = editor.getSession();
+    var i, j, line, first, lines = session.doc.getAllLines();
+    outer: for (i = 0; i < lines.length; i++) {
+      line = session.getTokens(i);
+      for (j = 0; j < line.length; j++) {
+        if (line[j].type === "disallowed") {
+          first = line[j].value;
+          break outer;
+        }
+      }
+    }
+    return first;
+  };
+  */
 
   Mode.prototype.getDisallowed = function(editor) {
     let session = editor.getSession();
@@ -71,8 +71,7 @@ define("ace/mode/upwriter",["require","exports","module","ace/lib/oop","ace/mode
       });
       return m;
     }, {}));
-  };
-
+  }
 
   Mode.prototype.onRecalculateAllowed = function(editor, cb) {
     let self = this;
